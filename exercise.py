@@ -66,7 +66,6 @@ class Game():
 
 
     def check_winner(self):
-        # self.board['a1'] and (self.board['a1'] == self.board['b1'] == self.board['c1'])
         winning_moves = [
             ['a1', 'b1', 'c1'],
             ['a2', 'b2', 'c2'],
@@ -98,30 +97,7 @@ class Game():
 
 
 
-    # def get_move(self):
 
-# game_instance = Game()
-# game_instance.play_game()
 
 game1 = Game()
-# print(game1.print_board()) # printed board
-# game1.play_game()
-# print(game1.print_message())
-# print(game1.get_move())
-# print(game1.place_piece())
-# print(game1.check_winner())
-# print(game1.check_for_tie())
-
 game1.play_game()
-
-
-# Your goal is to implement the following user stores:
-
-# As a user (AAU), I want to see a welcome message at the start of a game.
-# AAU, before being prompted for a move, I want to see the board printed in the console to know what moves have been made.
-# AAU, at the beginning of each turn, told whose turn it is: It’s player X’s turn!
-# AAU, I should be prompted to enter a move and be provided an example of valid input ('Enter a valid move (example: A1)').
-# AAU, I want to be able to enter my move’s column letter in upper or lower case (a/A, b/B, or c/C) to make it easier to enter my move.
-# AAU, if I enter a move in an invalid format or try to occupy a cell already taken, I want to see a message chastising me and be re-prompted.
-# AAU, after entering a move, I should once again be presented with the updated game board, notified of the current turn, and asked to enter a move for the other player. This process should continue until there is a winner or a tie
-# AAU, I should see a message at the end of the game indicating the winner or stating that the game ended in a tie.
