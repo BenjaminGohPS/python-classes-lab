@@ -4,7 +4,7 @@ class Game():
         self.tie = False
         self.winner = None
         self.board = {
-            'a1': 'x', 'b1': None, 'c1': None,
+            'a1': 'x', 'b1': 'x', 'c1': 'x',
             'a2': None, 'b2': None, 'c2': None,
             'a3': None, 'b3': None, 'c3': None, 
         }
@@ -68,7 +68,26 @@ class Game():
 
     def check_winner(self):
         # self.board['a1'] and (self.board['a1'] == self.board['b1'] == self.board['c1'])
-        pass
+        winning_moves = [
+            ['a1', 'b1', 'c1'],
+            ['a2', 'b2', 'c2'],
+            ['a3', 'b3', 'c3'],
+            ['a1', 'a2', 'a3'],
+            ['b1', 'b2', 'b3'],
+            ['c1', 'c2', 'c3'],
+            ['a1', 'b2', 'c3'],
+            ['a3', 'b2', 'c1']
+        ]
+
+        for winning_move in winning_moves:
+            if self.board[winning_move[0]] == self.board[winning_move[1]] == self.board[winning_move[2]] != None:
+                self.winner = self.board[winning_move[0]]
+                print(f'{self.board[winning_move[0]]} has won!')
+                return True
+            else:
+                return False
+
+
 
     def check_for_tie(self):
         pass
@@ -87,7 +106,8 @@ print(game1.print_board()) # printed board
 # game1.play_game()
 # print(game1.print_message())
 # print(game1.get_move())
-print(game1.place_piece())
+# print(game1.place_piece())
+print(game1.check_winner())
 
 
 
