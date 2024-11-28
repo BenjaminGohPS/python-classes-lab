@@ -4,7 +4,7 @@ class Game():
         self.tie = False
         self.winner = None
         self.board = {
-            'a1': 'x', 'b1': 'x', 'c1': 'x',
+            'a1': None, 'b1': None, 'c1': None,
             'a2': None, 'b2': None, 'c2': None,
             'a3': None, 'b3': None, 'c3': None, 
         }
@@ -23,37 +23,36 @@ class Game():
     
     def play_game(self):
         print("Shall we play a game?")
-        
+        self.print_board()
 
-        # While there is no winner or tie
-            # render
-            # get player input
-            # check for a winner
-            # check for a tie
-            # switch turns
-            # ...repeat until there is a winner or tie
-        # Outside the loop, render state at the end of a game
+        while True:
+            self.place_piece()
+
+            if self.check_winner() is not None:
+                self.print_message()
+                break
+
+            if self.check_for_tie():
+                self.print_message()
+                break
+
+            self.turn = 'o' if self.turn == 'x' else 'x'
+            self.print_message()
+        
 
     def print_message(self):
         if self.tie:
             print("Tie game!")
-        elif self.tie == False and self.winner == True:
+        elif self.tie == False and self.check_winner() == True:
             print(f'{self.winner} wins the game!')
         else:
-            print(f"It's player {self.turn}'s turn!")
-
-        ## If there is a tie: print("Tie game!")
-        ## If there is a winner: print(f"{self.winner} wins the game!")
-        ## Otherwise: print(f"It's player {self.turn}'s turn!")
+            print(f"Play continues!")
 
     
     def get_move(self):
-        # prompt user for input
-        # If the input is valid, update the board and break the loop
-        # otherwise, print a message notifying the user of the invalid input and allow the loop to continue
         while True:
             move = input(f"It's player {self.turn}. Enter a valid move (example: A1): ").lower()
-            if move not in ['a1' , 'a2' , 'a3', 'b1', 'b2' , 'b3', 'c1', 'c2', 'c3']:
+            if move not in ['a1', 'a2', 'a3', 'b1', 'b2', 'b3', 'c1', 'c2', 'c3']:
                 print(f'{move} is invalid. Please try again')
             elif self.board[move] != None:
                 print(f'{move} is on an occupied space. Try again')
@@ -82,16 +81,19 @@ class Game():
         for winning_move in winning_moves:
             if self.board[winning_move[0]] == self.board[winning_move[1]] == self.board[winning_move[2]] != None:
                 self.winner = self.board[winning_move[0]]
-                print(f'{self.board[winning_move[0]]} has won!')
                 return True
             else:
-                return False
+                None
 
 
 
     def check_for_tie(self):
-        pass
-
+        if self.check_winner() is None and all(self.board[position] is not None for position in self.board):
+            self.tie = True
+            print(f'We have a tie. Play again?')
+            return True
+        else:
+            return False
 
 
 
@@ -102,13 +104,15 @@ class Game():
 # game_instance.play_game()
 
 game1 = Game()
-print(game1.print_board()) # printed board
+# print(game1.print_board()) # printed board
 # game1.play_game()
 # print(game1.print_message())
 # print(game1.get_move())
 # print(game1.place_piece())
-print(game1.check_winner())
+# print(game1.check_winner())
+# print(game1.check_for_tie())
 
+game1.play_game()
 
 
 # Your goal is to implement the following user stores:
